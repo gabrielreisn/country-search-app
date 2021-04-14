@@ -23,3 +23,9 @@ Use: https://restcountries.eu/rest/v2/all to get all the countries
 3. Go to the root directory of the repository in your command line and run npm i or npm install
 4. Run npm start, and it should load a basic rendered page in your default browser
 5. You're ready to code!
+
+
+
+# Personal considerations
+
+The final version of the app was deployed to netlify and can be previewed [here](https://first-leaf-challenge.netlify.app/)
