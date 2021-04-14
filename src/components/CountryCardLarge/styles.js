@@ -25,6 +25,7 @@ section {
     width: 100%;
     max-height: 30vh;
     border-radius: 10px 10px 0 0;
+    object-fit: cover;
   }
 }
 
@@ -46,5 +47,11 @@ section {
     margin: 0.4rem 0;
     color: #666;
   }
+}
+
+@media (max-width: 900px) {
+    section {
+      width: 80vw;
+    }
 }
 `

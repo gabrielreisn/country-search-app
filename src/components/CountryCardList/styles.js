@@ -33,4 +33,24 @@ section {
     text-decoration-line: none;
   }
 }
+
+
+@media (max-width: 600px) {
+    .search-box {
+      label {
+        input {
+          width: 80vw;
+          height: 8vh;
+        }
+      }
+    }
+
+    section {
+      a {
+        div {
+          width: 80vw;
+        }
+      }
+    }
+}
 `
