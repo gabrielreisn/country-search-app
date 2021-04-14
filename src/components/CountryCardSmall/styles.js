@@ -1,7 +1,6 @@
-import React from 'react';
 import { css } from '@emotion/css';
 
-const cardStyles = css`
+export const cardStyles = css`
   width: 11rem;
   height: 2rem;
   border: 1px solid hsl(218, 100%, 45%);
@@ -22,12 +21,3 @@ const cardStyles = css`
     margin-right: 0.6rem;
   }
 `;
-
-export const CountryCardSmall = ({ src, alt, countryName }) => {
-  return (
-    <div className={cardStyles}>
-      <img src={src} alt={alt} />
-      <span>{countryName}</span>
-    </div>
-  );
-};
