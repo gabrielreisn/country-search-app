@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { largeCardStyle } from './styles';
+import Loader from '../Loader'
+import GenericError from '../GenericError'
 import { numberFormat } from '../../helpers';
 import { fetchSingleCountry } from '../../redux/countryReducer';
 
@@ -15,9 +17,9 @@ export const CountryCardLarge = () => {
     dispatch(fetchSingleCountry(slug));
   }, [dispatch]);
 
-  if (loading) return <span>loading...</span>;
+  if (loading) return <Loader />
 
-  if (error) return <span>error :(</span>;
+  if (error) return <GenericError />
 
   return (
     <main className={largeCardStyle}>

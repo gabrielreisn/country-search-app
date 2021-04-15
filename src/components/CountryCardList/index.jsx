@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import debounce from 'lodash/debounce';
 import { pageStyles } from './styles';
 import { CountryCardSmall } from '../CountryCardSmall';
+import Loader from '../Loader'
+import GenericError from '../GenericError'
 import { fetchAvailableCountries } from '../../redux/countryReducer';
 
 export const CountryCardList = () => {
@@ -18,9 +20,9 @@ export const CountryCardList = () => {
 
   const changeQueryWithDelay = debounce(setSearchQuery, 50);
 
-  if (loading) return <span>loading....</span>;
+  if (loading) return <Loader />
 
-  if (error) return <span>error :(</span>;
+  if (error) return <GenericError />
 
   return (
     <div className={pageStyles}>
