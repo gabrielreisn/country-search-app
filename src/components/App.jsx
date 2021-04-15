@@ -9,7 +9,7 @@ const ROUTES = {
 
 import { CountryCardList } from './CountryCardList';
 import { CountryCardLarge } from './CountryCardLarge';
-import rootReducer from '../helpers/store';
+import rootReducer from '../redux/store';
 
 class App extends Component {
   render() {

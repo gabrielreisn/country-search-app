@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import debounce from 'lodash/debounce';
-import { CountryCardSmall } from '../CountryCardSmall';
 import { pageStyles } from './styles';
-
-import { fetchAvailableCountries } from '../../reducers';
-import { useDispatch, useSelector } from 'react-redux';
+import { CountryCardSmall } from '../CountryCardSmall';
+import { fetchAvailableCountries } from '../../redux/countryReducer';
 
 export const CountryCardList = () => {
   const [searchQuery, setSearchQuery] = useState('');

@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { numberFormat } from '../../helpers';
-import { largeCardStyle } from './styles';
-
-import { fetchSingleCountry } from '../../reducers';
 import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import { largeCardStyle } from './styles';
+import { numberFormat } from '../../helpers';
+import { fetchSingleCountry } from '../../redux/countryReducer';
 
 export const CountryCardLarge = () => {
   const { slug } = useParams();
