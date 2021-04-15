@@ -1,33 +1,37 @@
-import React, {useEffect, useState} from 'react'
-import { useParams } from 'react-router-dom'
-import {numberFormat} from '../../helpers'
-import {largeCardStyle} from './styles'
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import { largeCardStyle } from './styles';
+import Loader from '../Loader'
+import GenericError from '../GenericError'
+import { numberFormat } from '../../helpers';
+import { fetchSingleCountry } from '../../redux/countryReducer';
 
 export const CountryCardLarge = () => {
-  const [country,setCountry] = useState(undefined)
-  const { slug } = useParams()
+  const { slug } = useParams();
 
-  useEffect(()=>{
-    const fetchCountry = async () => {
-      const res = await fetch(`https://restcountries.eu/rest/v2/name/${slug}`)
-      const data = await res.json()
+  const { current: country, loading, error } = useSelector((state) => state.country);
+  const dispatch = useDispatch();
 
-      setCountry(data[0])
-    }
+  useEffect(() => {
+    dispatch(fetchSingleCountry(slug));
+  }, [dispatch]);
 
-    fetchCountry()
-  },[])
+  if (loading) return <Loader />
 
-  if(!country) return <span>loading...</span>
+  if (error) return <GenericError />
 
-  return(
+  return (
     <main className={largeCardStyle}>
       <section>
-        <div className='image-wrapper'>
+        <div className="image-wrapper">
           <img src={country.flag} alt={country.name} />
         </div>
-        <div className='card-body'>
-          <h2>Hello,<br/> welcome to {country.name} !</h2>
+        <div className="card-body">
+          <h2>
+            Hello,
+            <br /> welcome to {country.name} !
+          </h2>
           <h6>Capital</h6>
           <h3>{country.capital}</h3>
           <h6>Population</h6>
@@ -37,11 +41,12 @@ export const CountryCardLarge = () => {
           <h3>{`${country.region} - ${country.subregion}`}</h3>
           <div>
             <h6>currencies</h6>
-            {country.currencies.map(e => <span key={e.code + e.name}>{`${e.code} (${e.symbol}) - ${e.name}`}</span>)}
+            {country?.currencies?.map((e) => (
+              <span key={e.code + e.name}>{`${e.code} (${e.symbol}) - ${e.name}`}</span>
+            ))}
           </div>
         </div>
       </section>
     </main>
-  )
-}
-
+  );
+};

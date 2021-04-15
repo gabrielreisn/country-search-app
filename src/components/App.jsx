@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 const ROUTES = {
@@ -6,22 +7,25 @@ const ROUTES = {
   view_county: '/country/:slug',
 };
 
-import {CountryCardList} from './CountryCardList'
-import {CountryCardLarge} from './CountryCardLarge'
+import { CountryCardList } from './CountryCardList';
+import { CountryCardLarge } from './CountryCardLarge';
+import rootReducer from '../redux/store';
 
 class App extends Component {
   render() {
     return (
-      <Router>
-        <Switch>
-          <Route path={ROUTES.view_county}>
-            <CountryCardLarge />
-          </Route>
-          <Route path={ROUTES.view_all}>
-            <CountryCardList />
-          </Route>
-        </Switch>
-      </Router>
+      <Provider store={rootReducer}>
+        <Router>
+          <Switch>
+            <Route path={ROUTES.view_county}>
+              <CountryCardLarge />
+            </Route>
+            <Route path={ROUTES.view_all}>
+              <CountryCardList />
+            </Route>
+          </Switch>
+        </Router>
+      </Provider>
     );
   }
 }

@@ -1,45 +1,52 @@
-import React, {useEffect, useState} from 'react'
-import { Link } from  'react-router-dom'
-import debounce from 'lodash/debounce'
-import {CountryCardSmall} from '../CountryCardSmall'
-import {pageStyles} from './styles'
-
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+import debounce from 'lodash/debounce';
+import { pageStyles } from './styles';
+import { CountryCardSmall } from '../CountryCardSmall';
+import Loader from '../Loader'
+import GenericError from '../GenericError'
+import { fetchAvailableCountries } from '../../redux/countryReducer';
 
 export const CountryCardList = () => {
-  const [countriesList, setCountriesList] = useState([]);
-  const [searchQuery, setSearchQuery] = useState('')
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const { countries: countriesList, loading, error } = useSelector((state) => state.country);
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    const fetchCountries = async () => {
-      const res = await fetch('https://restcountries.eu/rest/v2/all')
-      const data = await res.json()
+    dispatch(fetchAvailableCountries());
+  }, [dispatch]);
 
-      setCountriesList(data)
-    }
+  const changeQueryWithDelay = debounce(setSearchQuery, 50);
 
-    fetchCountries()
-  },[]) 
+  if (loading) return <Loader />
 
-  const changeQueryWithDelay = debounce(setSearchQuery,50)
+  if (error) return <GenericError />
 
-  return(
+  return (
     <div className={pageStyles}>
-      <div className='search-box'>
+      <div className="search-box">
         <label>
-          <input type='text' placeholder="Filter your countries here" onChange={(e) => changeQueryWithDelay(e.target.value)}/> 
+          <input
+            type="text"
+            placeholder="Filter your countries here"
+            onChange={(e) => changeQueryWithDelay(e.target.value)}
+          />
         </label>
       </div>
       <section>
         {countriesList
           .filter((country) => {
-            if (searchQuery === '') return country
-            return country.name.toLowerCase().includes(searchQuery.toLowerCase())
+            if (searchQuery === '') return country;
+            return country.name.toLowerCase().includes(searchQuery.toLowerCase());
           })
-          .map(country => 
-            <Link to={`/country/${country.name}`}>
-              <CountryCardSmall key={country.name} src={country.flag} countryName={country.name} />
+          .map((country) => (
+            <Link to={`/country/${country.name}`} key={country.name}>
+              <CountryCardSmall src={country.flag} countryName={country.name} />
             </Link>
-          )}
+          ))}
       </section>
     </div>
-  )
-}
+  );
+};
