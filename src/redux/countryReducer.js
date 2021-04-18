@@ -44,6 +44,7 @@ export const countrySlice = createSlice({
       state.loading = false;
     },
     [fetchAvailableCountries.rejected]: (state, { payload }) => {
+      state.loading = false;
       state.error = true;
     },
     [fetchSingleCountry.pending]: (state, action) => {
@@ -55,6 +56,7 @@ export const countrySlice = createSlice({
       state.loading = false;
     },
     [fetchSingleCountry.rejected]: (state, { payload }) => {
+      state.loading = false;
       state.error = true;
     },
   },
