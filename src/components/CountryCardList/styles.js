@@ -12,6 +12,7 @@ export const pageStyles = css`
 
   input {
     font-family: 'Ruda', Sans-Serif;
+    font-size: 0.8rem;
     width: 40vw;
     height: 5vh;
     padding: 0 1rem;
@@ -20,6 +21,10 @@ export const pageStyles = css`
 
     &:focus {
       outline-color: hsl(218, 100%, 40%);
+    }
+
+    &::placeholder {
+      color: hsl(218, 100%, 40%)
     }
   }
 }
