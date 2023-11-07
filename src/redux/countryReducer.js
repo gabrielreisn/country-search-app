@@ -7,7 +7,7 @@ export const fetchAvailableCountries = createAsyncThunk('country/fetchAllCountri
 
   if (!!countries.length) return countries;
 
-  const res = await fetch('https://restcountries.eu/rest/v2/all');
+  const res = await fetch('https://restcountries.com/v2/all');
   const data = await res.json();
 
   return data;
@@ -21,7 +21,7 @@ export const fetchSingleCountry = createAsyncThunk('country/fetchSingleCountry',
   const result = countries.find((country) => country.name.toLowerCase() === slug.toLowerCase());
   if (result) return result;
 
-  const res = await fetch(`https://restcountries.eu/rest/v2/name/${slug}`);
+  const res = await fetch(`https://restcountries.com//v2/name/${slug}`);
   const data = await res.json();
 
   return data;
