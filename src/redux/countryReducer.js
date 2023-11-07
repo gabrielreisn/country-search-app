@@ -21,7 +21,7 @@ export const fetchSingleCountry = createAsyncThunk('country/fetchSingleCountry',
   const result = countries.find((country) => country.name.toLowerCase() === slug.toLowerCase());
   if (result) return result;
 
-  const res = await fetch(`https://restcountries.com//v2/name/${slug}`);
+  const res = await fetch(`https://restcountries.com/v2/name/${slug}`);
   const data = await res.json();
 
   return data;
