@@ -19,7 +19,7 @@ const respondWith = (objects, meta = {}) =>
 
 describe('countries api', () => {
   beforeEach(() => {
-    vi.stubEnv('VITE_RESTCOUNTRIES_API_KEY', 'test-key');
+    vi.stubEnv('RESTCOUNTRIES_API_KEY', 'test-key');
     vi.stubGlobal('fetch', vi.fn());
   });
 
@@ -90,10 +90,10 @@ describe('countries api', () => {
   });
 
   test('rejects without calling the api when the key is missing', async () => {
-    vi.stubEnv('VITE_RESTCOUNTRIES_API_KEY', '');
+    vi.stubEnv('RESTCOUNTRIES_API_KEY', '');
     const consoleError = vi.spyOn(console, 'error').mockImplementation(() => {});
 
-    await expect(getAllCountries()).rejects.toThrow('VITE_RESTCOUNTRIES_API_KEY');
+    await expect(getAllCountries()).rejects.toThrow('RESTCOUNTRIES_API_KEY');
     expect(global.fetch).not.toHaveBeenCalled();
 
     consoleError.mockRestore();

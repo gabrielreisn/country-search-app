@@ -3,6 +3,7 @@ import { defineConfig } from 'vitest/config';
 
 export default defineConfig({
   plugins: [react()],
+  envPrefix: ['VITE_', 'RESTCOUNTRIES_API_KEY'],
   server: { port: 3000 },
   preview: { port: 3000 },
   build: { outDir: 'build' },

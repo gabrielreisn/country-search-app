@@ -3,10 +3,10 @@ const MAX_PAGE_SIZE = 100; // highest `limit` the free plan allows
 const RESPONSE_FIELDS = 'names.common,capitals,region,subregion,population,currencies,flag.url_svg';
 
 const request = async (path, params = {}) => {
-  const apiKey = import.meta.env.VITE_RESTCOUNTRIES_API_KEY;
+  const apiKey = import.meta.env.RESTCOUNTRIES_API_KEY;
 
   if (!apiKey) {
-    const message = 'VITE_RESTCOUNTRIES_API_KEY is not set, see the README.';
+    const message = 'RESTCOUNTRIES_API_KEY is not set, see the README.';
     console.error(message);
     throw new Error(message);
   }

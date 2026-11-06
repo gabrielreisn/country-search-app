@@ -38,7 +38,7 @@ The final version of the app was deployed to netlify and can be previewed [here]
 
 ## Getting Started
 
-The REST Countries API requires a key. Copy `.env.example` to `.env`, set `VITE_RESTCOUNTRIES_API_KEY`, and allow your hostnames on the key (`localhost` and the production domain), since browser requests from any other hostname get a 403. The key ends up in the browser bundle, so the hostname allowlist is what protects it. Set the same variable in the deployment environment.
+The REST Countries API requires a key. Copy `.env.example` to `.env`, set `RESTCOUNTRIES_API_KEY`, and allow your hostnames on the key (`localhost` and the production domain), since browser requests from any other hostname get a 403. The key ends up in the browser bundle, so the hostname allowlist is what protects it. Set the same variable in the deployment environment.
 
 Then run the development server:
 
