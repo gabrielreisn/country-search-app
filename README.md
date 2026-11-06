@@ -10,8 +10,8 @@ Given a data API located here: https://restcountries.com/. Build an app in React
 - allows you to click the country card, and display the countries' profile ("region, capital city and population (and any other extra info you'd like to add)")
 - allows you to search for a specific country by name
 
-Use: https://restcountries.com/v2/name/{name} ({name being the country name}) for searching the name
-Use: https://restcountries.com/v2/all to get all the countries
+Use: https://api.restcountries.com/countries/v5/name?q={name} ({name being the country name}) for searching the name
+Use: https://api.restcountries.com/countries/v5 to get all the countries
 
 ## Extra
 
@@ -31,31 +31,34 @@ The final version of the app was deployed to netlify and can be previewed [here]
 
 ## requirements
 
-- node v18.0.0 >
-- pnpm v8.0.0 >
+- node v26 (see `.nvmrc`)
+- pnpm v12
+- a [REST Countries](https://restcountries.com/api-keys) API key
 - docker (optional)
 
 ## Getting Started
 
-First, run the development server:
+The REST Countries API requires a key. Copy `.env.example` to `.env`, set `VITE_RESTCOUNTRIES_API_KEY`, and allow your hostnames on the key (`localhost` and the production domain), since browser requests from any other hostname get a 403. The key ends up in the browser bundle, so the hostname allowlist is what protects it. Set the same variable in the deployment environment.
+
+Then run the development server:
 
 ```bash
+pnpm install
 pnpm start
 # or
-docker-compose up --build
+docker compose up --build
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 ## Stack used
 
-- Create-react-app / React (as provided)
+- Vite / React
 - Redux
-- jest
+- Vitest
 - react-testing-library (RTL)
 - emotion (css-in-js lib)
-- eslint / prettier
-- travis CICD
+- GitHub Actions
 - Vercel (deployments and PR previews)
 - docker (optional)
 

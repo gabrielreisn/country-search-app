@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useParams } from 'react-router';
 import { largeCardStyle } from './styles';
 import Loader from '../Loader'
 import GenericError from '../GenericError'

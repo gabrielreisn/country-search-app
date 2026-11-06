@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import debounce from 'lodash/debounce';
 import { pageStyles } from './styles';
 import { CountryCardSmall } from '../CountryCardSmall';

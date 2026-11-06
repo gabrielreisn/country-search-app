@@ -1,10 +1,12 @@
 import React from  'react'
-import { MemoryRouter } from 'react-router-dom'
+import { MemoryRouter } from 'react-router'
 import { Provider } from 'react-redux'
 import {render,screen,fireEvent,waitFor} from '@testing-library/react'
 import { configureStore } from '@reduxjs/toolkit'
 import {CountryCardList} from '../index'
 import countryReducer from  '../../../redux/countryReducer'
+
+vi.mock('../../../api/countries')
 
 const fakeStore = (initialState) => configureStore({
   reducer: countryReducer,

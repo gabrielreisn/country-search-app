@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { getAllCountries, getCountryByName } from '../api/countries';
 
 export const fetchAvailableCountries = createAsyncThunk('country/fetchAllCountries', async (_, { getState }) => {
   const {
@@ -7,10 +8,7 @@ export const fetchAvailableCountries = createAsyncThunk('country/fetchAllCountri
 
   if (!!countries.length) return countries;
 
-  const res = await fetch('https://restcountries.com/v2/all');
-  const data = await res.json();
-
-  return data;
+  return getAllCountries();
 });
 
 export const fetchSingleCountry = createAsyncThunk('country/fetchSingleCountry', async (slug, { getState }) => {
@@ -21,10 +19,7 @@ export const fetchSingleCountry = createAsyncThunk('country/fetchSingleCountry',
   const result = countries.find((country) => country.name.toLowerCase() === slug.toLowerCase());
   if (result) return result;
 
-  const res = await fetch(`https://restcountries.com/v2/name/${slug}`);
-  const data = await res.json();
-
-  return data;
+  return getCountryByName(slug);
 });
 
 export const countrySlice = createSlice({
@@ -35,30 +30,31 @@ export const countrySlice = createSlice({
     error: false,
     current: {},
   },
-  extraReducers: {
-    [fetchAvailableCountries.pending]: (state, action) => {
-      state.loading = true;
-    },
-    [fetchAvailableCountries.fulfilled]: (state, { payload }) => {
-      state.countries = payload;
-      state.loading = false;
-    },
-    [fetchAvailableCountries.rejected]: (state, { payload }) => {
-      state.loading = false;
-      state.error = true;
-    },
-    [fetchSingleCountry.pending]: (state, action) => {
-      state.current = {};
-      state.loading = true;
-    },
-    [fetchSingleCountry.fulfilled]: (state, { payload }) => {
-      state.current = Array.isArray(payload) ? payload[0] : payload;
-      state.loading = false;
-    },
-    [fetchSingleCountry.rejected]: (state, { payload }) => {
-      state.loading = false;
-      state.error = true;
-    },
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchAvailableCountries.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(fetchAvailableCountries.fulfilled, (state, { payload }) => {
+        state.countries = payload;
+        state.loading = false;
+      })
+      .addCase(fetchAvailableCountries.rejected, (state) => {
+        state.loading = false;
+        state.error = true;
+      })
+      .addCase(fetchSingleCountry.pending, (state) => {
+        state.current = {};
+        state.loading = true;
+      })
+      .addCase(fetchSingleCountry.fulfilled, (state, { payload }) => {
+        state.current = payload;
+        state.loading = false;
+      })
+      .addCase(fetchSingleCountry.rejected, (state) => {
+        state.loading = false;
+        state.error = true;
+      });
   },
 });
 

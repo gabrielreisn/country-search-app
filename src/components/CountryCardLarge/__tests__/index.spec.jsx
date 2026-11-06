@@ -1,10 +1,12 @@
 import React from  'react'
-import { MemoryRouter } from 'react-router-dom'
+import { MemoryRouter } from 'react-router'
 import { Provider } from 'react-redux'
 import {render,screen} from '@testing-library/react'
 import { configureStore } from '@reduxjs/toolkit'
 import {CountryCardLarge} from '../index'
 import countryReducer from  '../../../redux/countryReducer'
+
+vi.mock('../../../api/countries')
 
 const fakeStore = (initialState) => configureStore({
   reducer: countryReducer,
@@ -14,7 +16,7 @@ const fakeStore = (initialState) => configureStore({
 
 describe('CountryCardLarge',()=>{
 
-  afterEach(()=>jest.clearAllMocks())
+  afterEach(()=>vi.clearAllMocks())
 
   test('loads the correct country based on the slug',()=>{
     const preloadedState = {
